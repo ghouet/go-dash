@@ -98,7 +98,11 @@ type Period struct {
 	SegmentTemplate *SegmentTemplate `xml:"SegmentTemplate,omitempty"`
 	AdaptationSets  []*AdaptationSet `xml:"AdaptationSet,omitempty"`
 	EventStreams    []EventStream    `xml:"EventStream,omitempty"`
+	Actuate         *string          `xml:"http://www.w3.org/1999/xlink actuate,attr,omitempty"`
+	HRef            *string          `xml:"http://www.w3.org/1999/xlink href,attr,omitempty"`
 }
+
+// xlink:href="http://dash.edgesuite.net/dash264/TestCases/5c/nomor/4_twoperiods_withremote.period" xlink:actuate="onLoad" xmlns:xlink="http://www.w3.org/1999/xlink"
 
 type DescriptorType struct {
 	SchemeIDURI *string `xml:"schemeIdUri,attr"`
@@ -574,6 +578,11 @@ func (period *Period) AddNewAdaptationSetAudioWithID(id string, mimeType string,
 		return nil, err
 	}
 	return as, nil
+}
+
+func (p *Period) SetXlink(actuate, href string) {
+	p.HRef = &href
+	p.Actuate = &actuate
 }
 
 // Create a new Adaptation Set for Video Assets.

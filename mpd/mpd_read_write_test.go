@@ -338,6 +338,8 @@ func LiveProfileDynamic() *MPD {
 	subtitleRep, _ := subtitleAS.AddNewRepresentationSubtitle(VALID_SUBTITLE_BANDWIDTH, VALID_SUBTITLE_ID)
 	_ = subtitleRep.SetNewBaseURL(VALID_SUBTITLE_URL)
 
+	m.period.SetXlink("onLoad", "https://video.io/remote.period")
+
 	return m
 }
 
